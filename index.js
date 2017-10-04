@@ -10,7 +10,7 @@ var api     = require('./routes/api');
 var app = express();
 
 
-var uri = 'mongodb://localhost/ipkm-lunch';
+var uri = process.env.MONGODB_URI;
 var db = mongoose.connection;
 db.on('error', console.error);
 db.once('open', () => {
