@@ -10,6 +10,7 @@ router.get('/', (req, res) => {
       console.log(err); res.json({"result":0})
       return ;
     }
+    console.log(result);
     res.json(result);
   });
 });

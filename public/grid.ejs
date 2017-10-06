@@ -1,0 +1,67 @@
+<html>
+  <head>
+     <title> <%=title %></title>
+  </head>
+  <body>
+    <h1>Grid Sample </h1>
+
+    <div data-ax5grid="first-grid" data-ax5grid-config='{name:"my first grid"}' style="height: 100%;"></div>
+  </body>
+  <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/ax5ui/ax5ui-grid/master/dist/ax5grid.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdn.rawgit.com/ax5ui/ax5core/master/dist/ax5core.min.js"></script>
+  <script type="text/javascript" src="https://cdn.rawgit.com/ax5ui/ax5ui-grid/master/dist/ax5grid.min.js"></script>
+  <script type="text/javascript">
+      var firstGrid = new ax5.ui.grid();
+      firstGrid.setConfig({
+      target: $('[data-ax5grid="first-grid"]'),
+      frozenColumnIndex: 2,
+      frozenRowIndex: 0,
+      showLineNumber: true,
+      //showRowSelector: true,
+      multipleSelect: false,
+      lineNumberColumnWidth: 40,
+      rowSelectorColumnWidth: 28,
+      sortable: true,
+      multiSort: false,
+      header: {
+          align: "center",
+          columnHeight: 28
+      },
+      body: {
+          align: "center",
+          columnHeight: 28,
+          onClick: function () {
+               console.log(this);
+              this.self.select(this.dindex);
+          }
+      },
+      columns: [
+          {key:"use_place", label:"장소", algin:"center"},
+          {key:"use_date", label:"날짜", algin:"center"},
+          {key:"use_amt", label:"금액", algin:"center"},
+      ]
+      });
+
+      var xmlhttp;
+      if (window.XMLHttpRequest) {
+          xmlhttp = new XMLHttpRequest();
+      }
+      else {
+          xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+
+      //Ajax구현부분
+      xmlhttp.onreadystatechange = function() {
+          if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+               console.log('success');
+               var returnVal = JSON.parse(xmlhttp.responseText);
+               console.log(returnVal);
+               firstGrid.setData(returnVal);
+          }
+      }
+      xmlhttp.open("GET", "/use", true);
+      xmlhttp.send();
+
+  </script>
+</html>
