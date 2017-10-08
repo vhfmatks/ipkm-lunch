@@ -6,11 +6,7 @@ var Usectnt = require('../models/use');
 router.get('/', (req, res) => {
   console.log(req.body);
   Usectnt.find( (err, result) => {
-    if(err){
-      console.log(err); res.json({"result":0})
-      return ;
-    }
-    console.log(result);
+    if(err) { res.json({ "result" : 0, "error" : err }); return ;}
     res.json(result);
   });
 });

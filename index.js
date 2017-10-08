@@ -29,25 +29,16 @@ app.use('/use', useCtnt);
 app.use('/deposit', Deposit);
 app.use('/api', api);
 
+app.use('/js', express.static(__dirname + '/public/js'));
+
+
 app.get('/', (req, res) => {
 
-  var list = [
-    {
-          "date": "20160603",
-          "code": "01",
-          "name": "CNY",
-          "amt": 300
-      },
-      {
-        "date": "20160603",
-        "code": "04",
-        "name": "CNY",
-        "amt": 200
-      },
-  ];
-  res.render('grid', { "title" : "grid title", "list" : list } );
+  res.render('grid', { "title" : "grid title" } );
 });
-
+// app.get('/UseCtnt.js', function(req, res) {
+//     res.sendfile('./public/UseCtnt.js');
+// });
 var port = process.env.PORT || 3000 ;
 app.listen(port, () => {
   console.log("express server is running");

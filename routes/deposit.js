@@ -2,6 +2,14 @@ var express = require('express');
 var router = express.Router();
 var Deposit = require('../models/deposit');
 
+router.get('/', (req, res) => {
+  var desposit = new Desposit();
+  deposit.find( (err, result) => {
+    if(err) { res.json({ "result" : 0, "error" : err }); return ;}
+    res.json(result);
+  });
+});
+
 router.post('/', (req, res) => {
   var deposit = new Deposit();
 
