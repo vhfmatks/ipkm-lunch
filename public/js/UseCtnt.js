@@ -1,12 +1,11 @@
 ax5.ui.grid.formatter["date"] = function()
 {
   var date = this.value;
-  return date.substr(0,10); // .toLocaleString('ko-KR');
-}
-ax5.ui.grid.formatter["amt"] = function()
-{
-  var date = this.value;
-  return date.toLocaleString(); // .toLocaleString('ko-KR');
+  if(date != ""  )
+    return date.substring(0,10); // .toLocaleString('ko-KR');
+  else {
+    return date;
+  }
 }
 var firstGrid = new ax5.ui.grid();
 firstGrid.setConfig({
@@ -35,6 +34,20 @@ firstGrid.setConfig({
   columns: [
       {key:"use_place", label:"장소", algin:"center"},
       {key:"use_date", label:"날짜", algin:"center", formatter:"date"},
-      {key:"use_amt", label:"금액", algin:"center", formatter:"amt"},
+      {key:"use_amt", label:"금액", algin:"center", formatter:"money"},
   ]
 });
+
+$('[data-grid-control]').click(function () {
+            switch (this.getAttribute("data-grid-control")) {
+                case "row-add":
+                  firstGrid.addRow($.extend({}, firstGrid.list[0]), "last", {focus: "END"});
+                  break;
+                case "row-remove":
+                  firstGrid.removeRow();
+                  break;
+                case "row-get":
+                  console.log(firstGrid.getList("modified"));
+                  break;
+            }
+        });

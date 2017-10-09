@@ -4,7 +4,11 @@
   </head>
   <body>
     <h1>Grid Sample </h1>
-
+    <div style="padding: 10px;">
+        <button class="btn btn-default" data-grid-control="row-add">row add</button>
+        <button class="btn btn-default" data-grid-control="row-remove">row remove</button>
+        <button class="btn btn-default" data-grid-control="row-get">row get</button>
+    </div>
     <div data-ax5grid="first-grid" data-ax5grid-config='{name:"my first grid"}' style="height: 40%; width:100%"></div>
   </body>
   <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/ax5ui/ax5ui-grid/master/dist/ax5grid.css" />
@@ -12,7 +16,16 @@
   <script type="text/javascript" src="https://cdn.rawgit.com/ax5ui/ax5core/master/dist/ax5core.min.js"></script>
   <script type="text/javascript" src="https://cdn.rawgit.com/ax5ui/ax5ui-grid/master/dist/ax5grid.min.js"></script>
   <script type="text/javascript" src="/js/UseCtnt.js">  </script>
-  <script type="text/javascript">
+  <script type="text/javascript" >
+    $.ajax({
+      method: "GET",
+      url:"/use",
+      success: function(res){
+        firstGrid.setData(res);
+      }
+    })
+  </script>
+  <!-- <script type="text/javascript">
     var xmlhttp;
     if (window.XMLHttpRequest) {    xmlhttp = new XMLHttpRequest();}
     else {    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");}
@@ -27,4 +40,4 @@
     xmlhttp.open("GET", "/use", true);
     xmlhttp.send();
   </script>
-</html>
+</html> -->
