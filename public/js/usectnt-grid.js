@@ -1,4 +1,4 @@
-ax5.ui.grid.formatter["date"] = function()
+ax5.ui.grid.formatter["date1"] = function()
 {
   var date = this.value;
   if(date != ""  )
@@ -33,7 +33,7 @@ firstGrid.setConfig({
   },
   columns: [
       {key:"use_place", label:"장소", algin:"center", editor:{type:"text"}},
-      {key:"use_date", label:"날짜", algin:"center", formatter:"date", editor:{type:"text"}},
+      {key:"use_date", label:"날짜", algin:"center", formatter:"date1",editor:{type:"date"}},
       {key:"use_amt", label:"금액", algin:"center", formatter:"money",editor:{type:"text"}},
   ]
 });
@@ -54,7 +54,6 @@ $('[data-grid-control]').click(function () {
                   break;
                 case "row-get":
                   var modifiedList = firstGrid.getList("modified");
-                  console.log(JSON.stringify(modifiedList));
                   $.ajax({
                     url: "/use",
                     type: "PUT",
@@ -64,7 +63,7 @@ $('[data-grid-control]').click(function () {
                     dataType:"json",
                     data: JSON.stringify(modifiedList),
                     success: function(data) {
-                        console.log('success', data);
+                        window.location.reload(true);
                     }
                 });
               }

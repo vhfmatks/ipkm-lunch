@@ -39,7 +39,7 @@ app.get('/', (req, res) => {
 // app.get('/UseCtnt.js', function(req, res) {
 //     res.sendfile('./public/UseCtnt.js');
 // });
-var port = process.env.PORT || 3000 ;
+var port = process.env.PORT || 80 ;
 app.listen(port, () => {
   console.log("express server is running");
 });

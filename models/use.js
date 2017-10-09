@@ -10,4 +10,8 @@ var useSchema = new Schema(
   }
 );
 
-module.exports = mongoose.model('usectnt', useSchema);
+
+module.exports = {
+  mongo : mongoose.model('usectnt', useSchema) ,
+  objecId : function() { var newId = new mongoose.Types.ObjectId(); return newId}
+}

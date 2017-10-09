@@ -5,7 +5,7 @@ var Usectnt = require('../models/use');
 
 router.get('/', (req, res) => {
 
-  Usectnt.find( (err, result) => {
+  Usectnt.mongo.find( (err, result) => {
     if(err) { res.json({ "result" : 0, "error" : err }); return ;}
     res.json(result);
   });
@@ -14,33 +14,16 @@ router.get('/', (req, res) => {
 router.put('/', (req, res) => {
   var updateCnt = 0;
   for( i in req.body ){
-    console.log('getNewid' , Usectnt.getNewId('a'));
     if(req.body[i]._id == null){
-      //req.body[i]._id = new mongoose.Types.ObjectId();
-
-      console.log(req.body[i]._id);
+      req.body[i]._id = Usectnt.objecId();
     }
-    Usectnt.update( {'_id':req.body[i]._id}, {$set:{ "use_place":req.body[i].use_place,
-                                                     "use_date" :req.body[i].use_date,
-                                                     "use_amt"  :req.body[i].use_amt   }
-                                              }
+    Usectnt.mongo.update( {'_id':req.body[i]._id}, {$set:req.body[i]}
                    , {upsert:true}, (err,out) => {
        if(err) console.log(err);
        else updateCnt ++ ;
     });
   }
   res.json({message : "success", update : updateCnt});
-
-  // Usectnt.updateMany({}, {$set:req.body}, (err, output) => {
-  //   res.json({ message : req.body});
-  // });
-  //res.json({ message : req.body});
-  // Usectnt.update({_id:req.params.use_id}, {$set: req.body},{upsert:true}, (err, output) =>{
-  //   console.log(output);
-  //   if(err) return res.status(500).json({error:"databse error"});
-  //   if(!output.n) return res.status(404).json({error:'book not found'});
-  //   res.json({message : 'use updated'});
-  // });
 });
 
 router.post('/', (req, res) => {
