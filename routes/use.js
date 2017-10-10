@@ -27,7 +27,7 @@ router.put('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  console.log('post' + req.body);
+
   res.json({ message : req.body});
   // var useCtnt = new Usectnt();
   //

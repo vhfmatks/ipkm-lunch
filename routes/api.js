@@ -74,8 +74,6 @@ function getUseCtnt(p_month, callback){
               (err, result) =>{
 
     for(i in result){
-      console.log("ymd : " , result[i].use_date.toISOString());
-
       resText += result[i].use_place.substring(0,4)  + "/"
                + result[i].use_date.toISOString().substring(2,10).trim()+ "/"
                + result[i].use_amt.toLocaleString() + "\n";
@@ -91,13 +89,13 @@ function getUseCtnt(p_month, callback){
 function getDeposit(user_name, callback){
   var resText = user_name + "\n"
               + "해당월/입금액/입금일자\n";
-  Deposit.find( {"user":user_name} , (err, result) => {
+  Deposit.mongo.find( {"user":user_name} , (err, result) => {
     if(err) { console.log(err) ; callback(resText); }
     if(result == "") { resText = "" }
     for( i in result ){
-      resText += String(result[i].month.getYear()).substring(1,4) + '.' + ( result[i].month.getMonth() +1) + '월/'
+      resText += result[i].month.substring(2,7) + '월/'
                + result[i].amt.toLocaleString() + '/'
-               + result[i].use_date.toISOString().substring(2,10).trim() + '\n';
+               + result[i].date.substring(2,10) + '\n';
     }
     callback(resText);
   });
@@ -110,7 +108,7 @@ function getSum(callback){
     { $group : {_id : null, total : { $sum : "$use_amt" }}}
  ]).exec((err, result) => {
    retAmt = -1* result[0].total;
-   Deposit.aggregate([
+   Deposit.mongo.aggregate([
      { $group : {_id : null, total : { $sum : "$amt" }}}
    ]).exec((err, result2) => {
      retAmt = retAmt + result2[0].total;
