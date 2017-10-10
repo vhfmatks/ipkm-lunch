@@ -1,7 +1,6 @@
-
-var firstGrid = new ax5.ui.grid();
-firstGrid.setConfig({
-  target: $('[data-ax5grid="first-grid"]'),
+var depositGrid = new ax5.ui.grid();
+depositGrid.setConfig({
+  target: $('[data-ax5grid="deposit-grid"]'),
   //frozenColumnIndex: 2,
   frozenRowIndex: 0,
   showLineNumber: true,
@@ -17,30 +16,32 @@ firstGrid.setConfig({
   },
   body: {
       align: "center",
-      columnHeight: 28,
+      columnHeight: 28
   },
   columns: [
-      {key:"use_place", label:"장소", algin:"center", editor:{type:"text"}},
-      {key:"use_date", label:"날짜", algin:"center",editor:{type:"date"}},
-      {key:"use_amt", label:"금액", algin:"center", formatter:"money",editor:{type:"text"}},
+      {key:"month", label:"해당월", algin:"center",  editor:{type:"date"}},
+      {key:"user", label:"입금자", algin:"center",editor:{type:"text"}},
+      {key:"amt", label:"입금액", algin:"center", formatter:"money",editor:{type:"text"}},
+      {key:"date", label:"입금일자", algin:"center", editor:{type:"date"}},
   ]
 });
 
 var emptyList = {
-  "use_place" : "",
-  "use_date" : "",
-  "use_amt" :""
+  "month" : "",
+  "user" : "",
+  "amt" :"",
+  "date" :""
 }
 
 $('[data-grid-control]').click(function () {
             switch (this.getAttribute("data-grid-control")) {
-                case "row-add":
-                  firstGrid.addRow($.extend({}, emptyList), "last", {focus: "END"});
+                case "row-add2":
+                  depositGrid.addRow($.extend({}, emptyList), "last", {focus: "END"});
                   break;
-                case "row-remove":
-                  var selected = firstGrid.getList('selected');
+                case "row-remove2":
+                  var selected = depositGrid.getList('selected');
                   $.ajax({
-                    url:"/use",
+                    url:"/deposit",
                     type:"DELETE",
                     cache:false,
                     timeout:30000,
@@ -53,10 +54,10 @@ $('[data-grid-control]').click(function () {
                     }
                   });
                   break;
-                case "row-get":
-                  var modifiedList = firstGrid.getList("modified");
+                case "row-get2":
+                  var modifiedList = depositGrid.getList("modified");
                   $.ajax({
-                    url: "/use",
+                    url: "/deposit",
                     type: "PUT",
                     cache:false,
                     timeout : 30000,

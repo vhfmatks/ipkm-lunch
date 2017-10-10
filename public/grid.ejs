@@ -6,10 +6,18 @@
     <h1>Grid Sample </h1>
     <div style="padding: 10px;">
         <button class="btn btn-default" data-grid-control="row-add">row add</button>
-        <button class="btn btn-default" data-grid-control="row-remove">row remove</button>
-        <button class="btn btn-default" data-grid-control="row-get">row get</button>
+        <button class="btn btn-default" data-grid-control="row-remove">remove</button>
+        <button class="btn btn-default" data-grid-control="row-get">save</button>
     </div>
-    <div data-ax5grid="first-grid" data-ax5grid-config='{name:"my first grid"}' style="height: 40%; width:100%"></div>
+    <div data-ax5grid="first-grid" data-ax5grid-config='{name:"usectnt grid"}' style="height: 40%; width:100%"></div>
+
+    <div style="padding: 10px;">
+        <button class="btn btn-default" data-grid-control="row-add2">row add</button>
+        <button class="btn btn-default" data-grid-control="row-remove2">remove</button>
+        <button class="btn btn-default" data-grid-control="row-get2">save</button>
+    </div>
+
+    <div data-ax5grid="deposit-grid" data-ax5grid-config='{name:"deposit grid"}' style="height: 40%; width:100%"></div>
   </body>
   <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/ax5ui/ax5ui-grid/master/dist/ax5grid.css" />
   <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/ax5ui/ax5ui-calendar/master/dist/ax5calendar.css">
@@ -24,12 +32,20 @@
   <script type="text/javascript" src="https://cdn.rawgit.com/ax5ui/ax5ui-formatter/master/dist/ax5formatter.min.js"></script>
   <script type="text/javascript" src="https://cdn.rawgit.com/ax5ui/ax5ui-select/master/dist/ax5select.min.js"></script>
   <script type="text/javascript" src="/js/usectnt-grid.js">  </script>
+  <script type="text/javascript" src="/js/deposit-grid.js">  </script>
   <script type="text/javascript" >
     $.ajax({
       method: "GET",
       url:"/use",
       success: function(res){
         firstGrid.setData(res);
+      }
+    })
+    $.ajax({
+      method: "GET",
+      url:"/deposit",
+      success: function(res){
+        depositGrid.setData(res);
       }
     })
   </script>

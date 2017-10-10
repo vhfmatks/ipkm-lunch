@@ -49,5 +49,14 @@ router.post('/', (req, res) => {
   // })
 });
 
+router.delete('/', (req, res) => {
+  for(i in req.body){
+    Usectnt.mongo.remove({_id:req.body[i]._id}, (err, out) => {
+      if(err) console.log(err);
+      //console.log(out.CommandResult.result);
+    })
+  }
+  res.json(req.body);
+});
 
 module.exports = router;

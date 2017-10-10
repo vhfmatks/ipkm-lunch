@@ -6,7 +6,7 @@ var useSchema = new Schema(
   {
     use_place : String,
     use_amt   : Number,
-    use_date  : Date,
+    use_date  : String,
   }
 );
 
