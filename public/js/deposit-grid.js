@@ -24,6 +24,19 @@ depositGrid.setConfig({
       {key:"amt", label:"입금액", algin:"center", formatter:"money",editor:{type:"text"}},
       {key:"date", label:"입금일자", algin:"center", editor:{type:"date"}},
   ],
+  body: {
+                grouping: {
+                    by: ["month"],
+                    columns: [
+                        {
+                            label: function () {
+                                return this.groupBy.labels.join(", ").substring(0,7) + " SUM";
+                            }, colspan: 2, align: "center"
+                        },
+                        {key: "amt", collector: "sum", formatter: "money", align: "right", colspan:2},
+                    ]
+                }
+            },
   footSum: [
                 [
                     {label: "SUMMARY", colspan: 2, align: "center"},
