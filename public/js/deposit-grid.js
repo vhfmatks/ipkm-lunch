@@ -23,7 +23,13 @@ depositGrid.setConfig({
       {key:"user", label:"입금자", algin:"center",editor:{type:"text"}},
       {key:"amt", label:"입금액", algin:"center", formatter:"money",editor:{type:"text"}},
       {key:"date", label:"입금일자", algin:"center", editor:{type:"date"}},
-  ]
+  ],
+  footSum: [
+                [
+                    {label: "SUMMARY", colspan: 2, align: "center"},
+                    {key: "amt", collector: "sum", formatter: "money", align: "right"},
+                  ]
+                ]
 });
 
 var emptyList = {

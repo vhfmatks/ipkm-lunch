@@ -23,7 +23,14 @@ firstGrid.setConfig({
       {key:"use_place", label:"장소", algin:"center", editor:{type:"text"}},
       {key:"use_date", label:"날짜", algin:"center",editor:{type:"date"}},
       {key:"use_amt", label:"금액", algin:"center", formatter:"money",editor:{type:"text"}},
-  ]
+  ],
+  footSum: [
+                [
+                    {label: "SUMMARY", colspan: 2, align: "center"},
+                    {key: "use_amt", collector: "sum", formatter: "money", align: "right"},
+                    {key: "use_amt", collector: "avg", formatter: "money", align: "right"},
+                  ]
+                ]
 });
 
 var emptyList = {
