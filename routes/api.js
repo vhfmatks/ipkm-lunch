@@ -68,14 +68,18 @@ function getUseCtnt(p_month, callback){
   var toDate   = new Date();
   fromDate.setMonth( fromDate.getMonth() - p_month );
 
+  fromDate = fromDate.toISOString().substring(0,10);
+  toDate = toDate.toISOString().substring(0,10)
+
+  console.log(fromDate, toDate);
   var resText = "";
   var totalAmt = 0;
   Usectnt.mongo.find( {"use_date":{ "$gt":fromDate , "$lt":toDate } },
               (err, result) =>{
-
+    if(err) console.log(err);
     for(i in result){
       resText += result[i].use_place.substring(0,4)  + "/"
-               + result[i].use_date.toISOString().substring(2,10).trim()+ "/"
+               + result[i].use_date.substring(2,10).trim()+ "/"
                + result[i].use_amt.toLocaleString() + "\n";
       totalAmt += result[i].use_amt ;
     }
